@@ -27,7 +27,8 @@ class NewUser extends Component {
     this.props.addUser(this.state.fullname, this.state.age);
     // Reset the inputs / states
     this.setState({
-      name: ''
+      fullname: '',
+      age: ''
     })
   }
 
