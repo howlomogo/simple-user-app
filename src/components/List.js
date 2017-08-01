@@ -1,33 +1,56 @@
 import React, { Component } from 'react';
-import ListItem from './ListItem';
+import ListUsers from './ListUsers';
+import NewUser from './NewUser';
 
 class List extends Component {
 
   constructor() {
     super();
     this.state = {
+      cheese: 'cheese',
       users: [
         {
           id: 1,
-          name: 'John Cena',
+          fullname: 'John Cena',
           age: 30
         },
         {
           id: 2,
-          name: 'Hulk Hogan',
+          fullname: 'Hulk Hogan',
           age: 80
         },
         {
           id: 3,
-          name: 'Steve Austin',
+          fullname: 'Steve Austin',
           age: 40
         }
       ]
     };
   }
 
-  addUser() {
+  addUser(fullname, age) {
+    let users = this.state.users;
 
+    // Just generate a random ID as the number for now
+    let id = Math.floor((Math.random() * 100) +7);
+
+    let user = {
+      id: id,
+      fullname: fullname,
+      age: Number(age)
+    }
+
+    users.push(user);
+    console.log(users);
+
+    // State should not be, being updated here!!!
+    // Look at this
+    console.log(this.state.users);
+
+    // Update state
+    this.setState ({
+      users: users
+    })
   }
 
   removeUser(user) {
@@ -47,15 +70,15 @@ class List extends Component {
     // in the mapping function, so pass this as the second argument to preserve the current context:
     let users = this.state.users.map(function(user) {
       return (
-        <div>
-          
-          <ListItem key={user.id} user={user} removeUser={this.removeUser.bind(this)} />
-        </div>
+        <ListUsers key={user.id} user={user} removeUser={this.removeUser.bind(this)} />
       );
     }, this)
 
     return (
-      <div>
+      <div className="container">
+        <h2>Users</h2>
+        <hr/>
+        <NewUser addUser={this.addUser.bind(this)} />
         {users}
       </div>
     )
