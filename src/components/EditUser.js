@@ -16,14 +16,16 @@ class EditUser extends Component {
     // Update the input changes
     this.setState({
       [e.target.name]: e.target.value
+    }, () => {
+      // console.log(this.state);
     })
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('e is ' + e.target);
+    // Update the users details from the main page, pass user id for a reference
+    this.props.updateUser(this.props.user.id, this.state.fullname, this.state.age);
 
-    this.props.addUser(this.state.fullname, this.state.age);
     // Reset the inputs / states
     this.setState({
       fullname: '',
@@ -45,7 +47,7 @@ class EditUser extends Component {
               <label>Age</label>
               <input name="age" value={this.state.age} onChange={this.handleInputChange} className="form-control" type="text"/>
             </div>
-            <input type="submit" onClick={() => this.props.updateUser(this.props.user)} value="Confirm Edit" className="btn btn-success" />
+            <input type="submit" value="Confirm Edit" className="btn btn-success" />
           </form>
           <hr/>
         </div>

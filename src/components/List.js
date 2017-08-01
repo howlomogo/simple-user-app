@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'immutability-helper';
 import ListUsers from './ListUsers';
 import NewUser from './NewUser';
 
@@ -51,8 +52,26 @@ class List extends Component {
   }
 
   // Update A User
-  updateUser(user) {
-    console.log(user);
+  updateUser(id, fullname, age) {
+    console.log(this.state.users);
+    let users = this.state.users.slice();
+
+    // TODO - This is NOT how this should be done, make this immutable
+    // And look at it tomorrow, I'm suprised this even works! As it shouldn't
+    let updatedUser = users.filter((item)=> {
+      if(item.id === id) {
+        item.fullname = fullname;
+        item.age = age;
+        return item;
+      }
+    })
+
+    this.setState ({
+      users: users
+    })
+
+    console.log(this.state.users);
+    console.log(this.state.users);
   }
 
   // Remove A User
