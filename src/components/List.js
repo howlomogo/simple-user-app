@@ -28,8 +28,10 @@ class List extends Component {
     };
   }
 
+  // Add A New User
   addUser(fullname, age) {
-    let users = this.state.users;
+    // Slice into new array and amend this array
+    let users = this.state.users.slice();
 
     // Just generate a random ID as the number for now
     let id = Math.floor((Math.random() * 100) +7);
@@ -41,11 +43,6 @@ class List extends Component {
     }
 
     users.push(user);
-    console.log(users);
-
-    // State should not be, being updated here!!!
-    // Look at this
-    console.log(this.state.users);
 
     // Update state
     this.setState ({
@@ -53,6 +50,12 @@ class List extends Component {
     })
   }
 
+  // Update A User
+  updateUser(user) {
+    console.log(user);
+  }
+
+  // Remove A User
   removeUser(user) {
     let users = this.state.users;
     let index = users.indexOf(user);
@@ -70,7 +73,7 @@ class List extends Component {
     // in the mapping function, so pass this as the second argument to preserve the current context:
     let users = this.state.users.map(function(user) {
       return (
-        <ListUsers key={user.id} user={user} removeUser={this.removeUser.bind(this)} />
+        <ListUsers key={user.id} user={user} updateUser={this.updateUser.bind(this)} removeUser={this.removeUser.bind(this)} />
       );
     }, this)
 

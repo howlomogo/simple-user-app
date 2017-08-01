@@ -9,3 +9,15 @@
 label {
   margin-right: 8px;
 }
+
+.mr-2 {
+  margin-right: 16px;
+}
+
+.u-display--none {
+  display: none;
+}
+
+.u-display--block {
+  display: block;
+}
