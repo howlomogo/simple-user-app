@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import update from 'immutability-helper';
-import ListUsers from './ListUsers';
-import NewUser from './NewUser';
+import ListUsers from './../components/ListUsers';
+import NewUser from './../components/NewUser';
+import { BrowserRouter, Route } from 'react-router-dom';
+import UserDetails from './UserDetails';
+
 
 class List extends Component {
 
   constructor() {
     super();
     this.state = {
-      cheese: 'cheese',
       users: [
         {
           id: 1,
@@ -92,11 +93,15 @@ class List extends Component {
     }, this)
 
     return (
-      <div className="container">
+      <div>
         <h2>Users</h2>
         <hr/>
         <NewUser addUser={this.addUser.bind(this)} />
         {users}
+        
+        <Route path='/list/:id' component={(props) => (
+          <UserDetails {...props} users={this.state.users}/>
+        )} />
       </div>
     )
   }

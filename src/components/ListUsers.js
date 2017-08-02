@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EditUser from './EditUser';
+import {Link} from 'react-router-dom';
 
 class ListUsers extends Component {
   constructor() {
@@ -22,6 +23,9 @@ class ListUsers extends Component {
             </h4>
           </div>
           <div className="col-md-6">
+            <button className="btn btn-default u-inline-block mr-2">
+              <Link to={`/list/${this.props.user.id}`}>View User</Link>
+            </button>
             <button className="btn btn-default u-inline-block mr-2" onClick={() => this.showEditable(this.props.user.id)}>Edit User</button>
             <button className="btn btn-danger u-inline-block" onClick={() => this.props.removeUser(this.props.user)}>Delete User</button>
           </div>
