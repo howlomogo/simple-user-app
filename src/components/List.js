@@ -53,25 +53,20 @@ class List extends Component {
 
   // Update A User
   updateUser(id, fullname, age) {
-    console.log(this.state.users);
     let users = this.state.users.slice();
-
-    // TODO - This is NOT how this should be done, make this immutable
-    // And look at it tomorrow, I'm suprised this even works! As it shouldn't
-    let updatedUser = users.filter((item)=> {
-      if(item.id === id) {
-        item.fullname = fullname;
-        item.age = age;
-        return item;
+    // Update the edited users details with no mutation to the state
+    for(let i=0; i<users.length; i++) {
+      if(users[i].id === id) {
+        let updatedUser = Object.assign({}, users[i], {fullname: fullname, age: age})
+        users[i] = updatedUser;
+        break;
       }
-    })
+    }
 
+    // Update the user State
     this.setState ({
       users: users
-    })
-
-    console.log(this.state.users);
-    console.log(this.state.users);
+    });
   }
 
   // Remove A User
